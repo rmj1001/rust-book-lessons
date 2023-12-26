@@ -17,28 +17,17 @@ pub mod practice {
     pub mod pr_1_celcius;
     pub mod pr_2_rectangle;
 }
-
-struct MenuEntry {
-    name: String,
-    code: fn(),
-}
-
-fn string(s: &str) -> String {
-    s.to_string()
-}
-
 fn main() {
     loop {
         page_header("Rust Book Code Repository");
 
-        let options: Vec<&str> = vec!["Lessons", "Practice", "Exit"];
+        let options: Vec<String> = vec![
+            "1. Lessons Menu".to_string(),
+            "2. Practice Modules Menu".to_string(),
+            "NAV: Exit".to_string(),
+        ];
 
-        let choice = dialoguer::Select::new()
-            .with_prompt("Select an option below")
-            .items(&options)
-            .default(0)
-            .interact()
-            .unwrap_or(2);
+        let choice: usize = dialogue_selector(&options, 2);
 
         match choice {
             0 => lessons_menu(),
@@ -63,15 +52,10 @@ fn lessons_menu() {
             options.push(value.name.clone());
         }
 
-        options.push("NAVIGATION: Main Menu".to_string());
-        options.push("NAVIGATION: Exit".to_string());
+        options.push("NAV: Main Menu".to_string());
+        options.push("NAV: Exit".to_string());
 
-        let choice = dialoguer::Select::new()
-            .with_prompt("Select an option below")
-            .items(&options)
-            .default(0)
-            .interact()
-            .unwrap_or(options.len() - 1);
+        let choice = dialogue_selector(&options, options.len() - 1);
 
         if choice == (options.len() - 2) {
             #[allow(clippy::main_recursion)]
@@ -109,15 +93,10 @@ fn practice_modules_menu() {
             options.push(value.name.clone());
         }
 
-        options.push("NAVIGATION: Main Menu".to_string());
-        options.push("NAVIGATION: Exit".to_string());
+        options.push("NAV: Main Menu".to_string());
+        options.push("NAV: Exit".to_string());
 
-        let choice = dialoguer::Select::new()
-            .with_prompt("Select an option below")
-            .items(&options)
-            .default(0)
-            .interact()
-            .unwrap_or(options.len() - 1);
+        let choice = dialogue_selector(&options, options.len() - 1);
 
         if choice == (options.len() - 2) {
             #[allow(clippy::main_recursion)]
@@ -150,7 +129,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         0,
         MenuEntry {
-            name: string("Hello World"),
+            name: string_slice_to_string("1. Hello World"),
             code: lessons::ch_1_hello_world::fmt,
         },
     );
@@ -158,7 +137,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         1,
         MenuEntry {
-            name: string("Guessing Game"),
+            name: string_slice_to_string("2. Guessing Game"),
             code: lessons::ch_2_guessing_game::fmt,
         },
     );
@@ -166,7 +145,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         2,
         MenuEntry {
-            name: string("Common Programming Concepts"),
+            name: string_slice_to_string("3. Common Programming Concepts"),
             code: lessons::ch_3_common_concepts::fmt,
         },
     );
@@ -174,7 +153,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         3,
         MenuEntry {
-            name: string("Ownership & Borrowing"),
+            name: string_slice_to_string("4. Ownership & Borrowing"),
             code: lessons::ch_4_ownership::fmt,
         },
     );
@@ -182,7 +161,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         4,
         MenuEntry {
-            name: string("Structs & Tuple Structs"),
+            name: string_slice_to_string("5. Structs & Tuple Structs"),
             code: lessons::ch_5_structs::fmt,
         },
     );
@@ -190,7 +169,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         5,
         MenuEntry {
-            name: string("Enums and Matching"),
+            name: string_slice_to_string("6. Enums and Matching"),
             code: lessons::ch_6_enums_matching::fmt,
         },
     );
@@ -198,7 +177,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         6,
         MenuEntry {
-            name: string("Project Management"),
+            name: string_slice_to_string("7. Project Management"),
             code: lessons::ch_7_project_management::fmt,
         },
     );
@@ -206,7 +185,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         7,
         MenuEntry {
-            name: string("Common Collections"),
+            name: string_slice_to_string("8. Common Collections"),
             code: lessons::ch_8_common_collections::fmt,
         },
     );
@@ -214,7 +193,7 @@ fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         8,
         MenuEntry {
-            name: string("Error Handling"),
+            name: string_slice_to_string("9. Error Handling"),
             code: lessons::ch_9_error_handling::fmt,
         },
     );
@@ -228,14 +207,14 @@ fn practice_mods_cache_builder() -> BTreeMap<u8, MenuEntry> {
     menu_cache.insert(
         0,
         MenuEntry {
-            name: string("Celcius"),
+            name: string_slice_to_string("1. Celcius"),
             code: practice::pr_1_celcius::fmt,
         },
     );
     menu_cache.insert(
         1,
         MenuEntry {
-            name: string("Rectangle"),
+            name: string_slice_to_string("2. Rectangle"),
             code: practice::pr_2_rectangle::fmt,
         },
     );
