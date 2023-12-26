@@ -1,4 +1,16 @@
 pub mod tui_formatting {
+    pub struct MenuEntry {
+        pub name: String,
+        pub code: fn(),
+    }
+
+    pub fn string_slice_to_string(s: &str) -> String {
+        s.to_string()
+    }
+
+    /// Create a string of dashes with desired length
+    ///
+    /// Example: create_line_string(3) // ---
     pub fn create_line_string(length: usize) -> String {
         let mut line_string: String = String::new();
         let mut index: usize = 0;
@@ -11,6 +23,8 @@ pub mod tui_formatting {
         line_string
     }
 
+    /// Print a line of dashes to STDOUT.
+    ///
     /// Default length is 80 characters
     pub fn print_line_string(line_length: Option<usize>) {
         #[allow(unused_assignments)]
@@ -24,7 +38,8 @@ pub mod tui_formatting {
         println!("{}", &line_string[..]);
     }
 
-    /// Prints a header with a title spanning 80 characters.
+    /// Prints a header with a title, using a line of dashes on the top
+    /// and bottom. The title is centered.
     pub fn page_header(title: &str) {
         crate::terminal::clear_screen();
 
@@ -68,21 +83,14 @@ pub mod tui_formatting {
         let _ = std::io::stdin().read_line(&mut garbage);
     }
 
-    pub fn prompt_for_input(prompt_string: &str) -> String {
-        let input = dialoguer::Input::new()
-            .with_prompt(format!("{} > ", prompt_string))
-            .interact_text();
-        let mut returned: String = String::new();
-
-        match input {
-            Ok(output) => returned = output,
-            Err(_) => {
-                println!("Expected input");
-                crate::terminal::exit();
-            }
-        };
-
-        returned
+    /// Creates a selector dialogue based on a vector of strings.
+    pub fn dialogue_selector(options: &[String], default_index: usize) -> usize {
+        dialoguer::Select::new()
+            .with_prompt("Select an option below (use arrow keys, then press enter)")
+            .items(options)
+            .default(0)
+            .interact()
+            .unwrap_or(default_index)
     }
 
     pub enum ModuleFlags {
@@ -111,8 +119,8 @@ pub mod tui_formatting {
         let title = &title[..];
 
         page_header(title);
-        println!("\nLesson: {}", name);
-        println!("Description: {}\n", description);
+        println!("Lesson: {}", name);
+        println!("Description: {}", description);
         print_line_string(None);
         println!("Output:\n");
         (code)();
