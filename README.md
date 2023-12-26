@@ -18,16 +18,10 @@ cargo run
 
 ## Screenshots
 
-Below are some screenshots I've taken of the project run in the terminal.
+Below are links to some screenshots I've taken of the project run in the terminal.
 
-## Main Menu
-
-![Main Menu](screenshots/1-%20Main%20menu.png)
-
-## Lesson Selection Menu
-
-![Lesson Menu](screenshots/2-%20Lesson%20Menu.png)
-
-## Lesson Module TUI
-
-![Lesson Module TUI](screenshots/3-%20Lesson%20Module%20TUI.png)
+1. [Main Menu](./screenshots/1-%20Main%20Menu.png)
+2. [Lesson Selection Menu](./screenshots/2-%20Lessons%20Menu.png)
+3. [Lesson Module](./screenshots/3-%20Lesson%20Module.png)
+4. [Practice Module Selection Menu](./screenshots/4-%20Practice%20Menu.png)
+5. [Practice Module](./screenshots/5-%20Practice%20Module.png)
