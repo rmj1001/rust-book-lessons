@@ -1,5 +1,5 @@
 pub mod tui_formatting {
-    pub struct MenuEntry {
+    pub struct Module {
         pub name: String,
         pub code: fn(),
     }
