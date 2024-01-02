@@ -108,43 +108,43 @@ fn modules_menu(menu_type: ModuleType) {
 fn new_lessons_cache() -> Vec<Module> {
     vec![
         Module {
-            name: string_slice_to_string("1. Hello World"),
+            name: "1. Hello World".to_string(),
             code: lessons::ch_1_hello_world::fmt,
         },
         Module {
-            name: string_slice_to_string("2. Guessing Game"),
+            name: "2. Guessing Game".to_string(),
             code: lessons::ch_2_guessing_game::fmt,
         },
         Module {
-            name: string_slice_to_string("3. Common Programming Concepts"),
+            name: "3. Common Programming Concepts".to_string(),
             code: lessons::ch_3_common_concepts::fmt,
         },
         Module {
-            name: string_slice_to_string("4. Ownership & Borrowing"),
+            name: "4. Ownership & Borrowing".to_string(),
             code: lessons::ch_4_ownership::fmt,
         },
         Module {
-            name: string_slice_to_string("5. Structs & Tuple Structs"),
+            name: "5. Structs & Tuple Structs".to_string(),
             code: lessons::ch_5_structs::fmt,
         },
         Module {
-            name: string_slice_to_string("6. Enums and Matching"),
+            name: "6. Enums and Matching".to_string(),
             code: lessons::ch_6_enums_matching::fmt,
         },
         Module {
-            name: string_slice_to_string("7. Project Management"),
+            name: "7. Project Management".to_string(),
             code: lessons::ch_7_project_management::fmt,
         },
         Module {
-            name: string_slice_to_string("8. Common Collections"),
+            name: "8. Common Collections".to_string(),
             code: lessons::ch_8_common_collections::fmt,
         },
         Module {
-            name: string_slice_to_string("9. Error Handling"),
+            name: "9. Error Handling".to_string(),
             code: lessons::ch_9_error_handling::fmt,
         },
         Module {
-            name: string_slice_to_string("10. Generic Types, Traits, Lifetimes"),
+            name: "10. Generic Types, Traits, Lifetimes".to_string(),
             code: lessons::ch_10_generics_traits_lifetimes::fmt,
         },
     ]
@@ -153,11 +153,11 @@ fn new_lessons_cache() -> Vec<Module> {
 fn new_practice_cache() -> Vec<Module> {
     vec![
         Module {
-            name: string_slice_to_string("1. Celcius"),
+            name: "1. Celcius".to_string(),
             code: practice::pr_1_celcius::fmt,
         },
         Module {
-            name: string_slice_to_string("2. Rectangle"),
+            name: "2. Rectangle".to_string(),
             code: practice::pr_2_rectangle::fmt,
         },
     ]

@@ -4,10 +4,6 @@ pub mod tui_formatting {
         pub code: fn(),
     }
 
-    pub fn string_slice_to_string(s: &str) -> String {
-        s.to_string()
-    }
-
     /// Create a string of dashes with desired length
     ///
     /// Example: create_line_string(3) // ---
