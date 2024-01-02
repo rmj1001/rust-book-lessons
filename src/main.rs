@@ -1,7 +1,7 @@
-use learning_rust::tui_formatting::*;
-use std::collections::BTreeMap;
+use learning_rust::{terminal::clear_screen, tui_formatting::*};
 
 pub mod lessons {
+    pub mod ch_10_generics_traits_lifetimes;
     pub mod ch_1_hello_world;
     pub mod ch_2_guessing_game;
     pub mod ch_3_common_concepts;
@@ -30,8 +30,8 @@ fn main() {
         let choice: usize = dialogue_selector(&options, 2);
 
         match choice {
-            0 => lessons_menu(),
-            1 => practice_modules_menu(),
+            0 => modules_menu(ModuleType::Lesson),
+            1 => modules_menu(ModuleType::Practice),
             2 => learning_rust::terminal::exit(),
             _ => {
                 println!("Expected valid input.");
@@ -40,16 +40,36 @@ fn main() {
         }
     }
 }
+enum ModuleType {
+    Lesson,
+    Practice,
+}
 
-fn lessons_menu() {
+fn modules_menu(menu_type: ModuleType) {
     loop {
-        let lessons = lessons_cache_builder();
-        page_header("Rust Book Lesson Repository");
+        clear_screen();
+
+        let modules: Vec<Module>;
+        let mut header: String = String::new();
+
+        match menu_type {
+            ModuleType::Lesson => {
+                modules = new_lessons_cache();
+                header.push_str("Rust Book Lesson Repository");
+            }
+
+            ModuleType::Practice => {
+                modules = new_practice_cache();
+                header.push_str("Rust Book Practice Repository");
+            }
+        }
+
+        page_header(&header);
 
         let mut options = Vec::new();
 
-        for value in lessons.values() {
-            options.push(value.name.clone());
+        for entry in &modules {
+            options.push(entry.name.clone());
         }
 
         options.push("NAV: Main Menu".to_string());
@@ -66,158 +86,79 @@ fn lessons_menu() {
             learning_rust::terminal::exit();
         }
 
-        let choice = choice as u8;
+        let module_option = modules.get(choice);
 
-        let lesson_option = lessons.get(&choice);
-
-        match lesson_option {
-            None => {
-                println!("Invalid lesson.");
-                learning_rust::tui_formatting::press_enter_to_continue();
-                continue;
+        match module_option {
+            Some(module) => {
+                (module.code)();
             }
 
-            Some(lesson) => (lesson.code)(),
-        }
+            None => {
+                println!("Invalid module.");
+
+                match menu_type {
+                    ModuleType::Lesson => modules_menu(ModuleType::Lesson),
+                    ModuleType::Practice => modules_menu(ModuleType::Practice),
+                }
+            }
+        };
     }
 }
 
-fn practice_modules_menu() {
-    loop {
-        let practice_modules = practice_mods_cache_builder();
-        page_header("Rust Book Practice Module Repository");
-
-        let mut options = Vec::new();
-
-        for value in practice_modules.values() {
-            options.push(value.name.clone());
-        }
-
-        options.push("NAV: Main Menu".to_string());
-        options.push("NAV: Exit".to_string());
-
-        let choice = dialogue_selector(&options, options.len() - 1);
-
-        if choice == (options.len() - 2) {
-            #[allow(clippy::main_recursion)]
-            main();
-        }
-
-        if choice == (options.len() - 1) {
-            learning_rust::terminal::exit();
-        }
-
-        let choice = choice as u8;
-
-        let practice_mod_option = practice_modules.get(&choice);
-
-        match practice_mod_option {
-            None => {
-                println!("Invalid practice_module.");
-                learning_rust::tui_formatting::press_enter_to_continue();
-                continue;
-            }
-
-            Some(practice_module) => (practice_module.code)(),
-        }
-    }
-}
-
-fn lessons_cache_builder() -> BTreeMap<u8, MenuEntry> {
-    let mut menu_cache: BTreeMap<u8, MenuEntry> = BTreeMap::new();
-
-    menu_cache.insert(
-        0,
-        MenuEntry {
+fn new_lessons_cache() -> Vec<Module> {
+    vec![
+        Module {
             name: string_slice_to_string("1. Hello World"),
             code: lessons::ch_1_hello_world::fmt,
         },
-    );
-
-    menu_cache.insert(
-        1,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("2. Guessing Game"),
             code: lessons::ch_2_guessing_game::fmt,
         },
-    );
-
-    menu_cache.insert(
-        2,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("3. Common Programming Concepts"),
             code: lessons::ch_3_common_concepts::fmt,
         },
-    );
-
-    menu_cache.insert(
-        3,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("4. Ownership & Borrowing"),
             code: lessons::ch_4_ownership::fmt,
         },
-    );
-
-    menu_cache.insert(
-        4,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("5. Structs & Tuple Structs"),
             code: lessons::ch_5_structs::fmt,
         },
-    );
-
-    menu_cache.insert(
-        5,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("6. Enums and Matching"),
             code: lessons::ch_6_enums_matching::fmt,
         },
-    );
-
-    menu_cache.insert(
-        6,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("7. Project Management"),
             code: lessons::ch_7_project_management::fmt,
         },
-    );
-
-    menu_cache.insert(
-        7,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("8. Common Collections"),
             code: lessons::ch_8_common_collections::fmt,
         },
-    );
-
-    menu_cache.insert(
-        8,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("9. Error Handling"),
             code: lessons::ch_9_error_handling::fmt,
         },
-    );
-
-    menu_cache
+        Module {
+            name: string_slice_to_string("10. Generic Types, Traits, Lifetimes"),
+            code: lessons::ch_10_generics_traits_lifetimes::fmt,
+        },
+    ]
 }
 
-fn practice_mods_cache_builder() -> BTreeMap<u8, MenuEntry> {
-    let mut menu_cache: BTreeMap<u8, MenuEntry> = BTreeMap::new();
-
-    menu_cache.insert(
-        0,
-        MenuEntry {
+fn new_practice_cache() -> Vec<Module> {
+    vec![
+        Module {
             name: string_slice_to_string("1. Celcius"),
             code: practice::pr_1_celcius::fmt,
         },
-    );
-    menu_cache.insert(
-        1,
-        MenuEntry {
+        Module {
             name: string_slice_to_string("2. Rectangle"),
             code: practice::pr_2_rectangle::fmt,
         },
-    );
-
-    menu_cache
+    ]
 }
