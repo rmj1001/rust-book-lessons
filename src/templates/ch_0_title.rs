@@ -1,9 +1,9 @@
 pub fn fmt() {
-    learning_rust::formatting::module_formatter(
+    learning_rust::tui_formatting::module_tui_formatter(
         "Title",
         "Description",
         main,
-        Some(learning_rust::formatting::ModFlag::Lesson),
+        Some(learning_rust::tui_formatting::ModuleFlags::Lesson),
     );
 }
 

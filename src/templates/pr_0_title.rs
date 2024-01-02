@@ -1,12 +1,10 @@
-use learning_rust::formatting::ModFlag;
-
 pub fn fmt() {
-    learning_rust::formatting::module_formatter(
+    learning_rust::tui_formatting::module_tui_formatter(
         "Title",
         "Description",
         main,
-        Some(ModFlag::Practice),
+        Some(learning_rust::tui_formatting::ModuleFlags::Practice),
     );
 }
 
-pub fn main() {}
+fn main() {}
