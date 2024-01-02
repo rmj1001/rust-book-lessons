@@ -86,7 +86,9 @@ pub mod tui_formatting {
     /// Creates a selector dialogue based on a vector of strings.
     pub fn dialogue_selector(options: &[String], default_index: usize) -> usize {
         dialoguer::Select::new()
-            .with_prompt("Select an option below (use arrow keys, then press enter)")
+            .with_prompt(
+                "Use arrow keys to select an option below, then press ENTER/RETURN to run it",
+            )
             .items(options)
             .default(0)
             .interact()
