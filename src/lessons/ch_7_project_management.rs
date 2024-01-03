@@ -151,27 +151,19 @@ crate
 */
 mod front_of_house {
     mod hosting {
-        #[allow(dead_code)]
         fn add_to_waitlist() {}
-        #[allow(dead_code)]
         fn seat_at_table() {}
     }
 
     mod serving {
-
-        #[allow(dead_code)]
         fn take_order() {}
-
-        #[allow(dead_code)]
         fn serve_order() {}
-
-        #[allow(dead_code)]
         fn take_payment() {}
     }
 }
 
 // throwaway for module below
-#[allow(dead_code)]
+
 fn deliver_order() {}
 
 // example of public module
@@ -185,21 +177,19 @@ pub mod back_of_house {
     pub mod kitchen {
         pub fn cook() {} // exposed
 
-        #[allow(dead_code)]
         fn clean() {} // not exposed
     }
 
     // Ancestor modules cannot refer to this or its inner contents.
     mod office {
-        #[allow(dead_code)]
+
         fn payroll() {}
-        #[allow(dead_code)]
+
         fn hiring() {}
-        #[allow(dead_code)]
+
         fn reports() {}
     }
 
-    #[allow(dead_code)]
     fn fix_incorrect_order() {
         cook();
 
@@ -226,7 +216,6 @@ pub fn eat_at_restaurant() {
 pub struct TestMessage {
     pub name: String, // publicly accessible
 
-    #[allow(dead_code)]
     memory_address: u64, // this is not accessible outside the parent scope
 }
 

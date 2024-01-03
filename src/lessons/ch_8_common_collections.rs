@@ -89,7 +89,7 @@ fn storing_utf8_with_strings() {
      */
 
     // Example of newly created empty string:
-    #[allow(unused_variables)]
+
     let empty_string: String = String::new();
 
     // Example of new string created from a string literal:
@@ -98,7 +98,7 @@ fn storing_utf8_with_strings() {
 
     // turn string iteral (&str) to String
     // you can also use the to_string() method on variables containing str types
-    #[allow(unused_variables)]
+
     let string_lit_to_string: String = "Hello World".to_string();
 
     // Appending to string
@@ -109,7 +109,6 @@ fn storing_utf8_with_strings() {
     // Concatenating Strings
     let string2: String = "World".to_string();
 
-    #[allow(unused_variables)]
     let string3: String = string + &string2; // $string is moved and now unusable
 
     // append strings without ownership rules

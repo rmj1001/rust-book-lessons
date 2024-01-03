@@ -49,9 +49,7 @@ impl User {
 }
 
 // Tuple Structs
-#[allow(dead_code)]
 struct Color(i32, i32, i32);
-#[allow(dead_code)]
 struct Point(i32, i32, i32);
 
 fn main() {
@@ -85,9 +83,8 @@ fn main() {
         ..user2
     };
 
-    #[allow(dead_code)]
     const BLACK: Color = Color(0, 0, 0);
-    #[allow(dead_code)]
+
     const ORIGIN: Point = Point(0, 0, 0);
 
     user3.prettify();

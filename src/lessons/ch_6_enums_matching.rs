@@ -25,16 +25,15 @@ enum IpAddrKind {
 
 #[derive(Debug)]
 struct IpAddr {
-    #[allow(dead_code)]
     kind: IpAddrKind,
-    #[allow(dead_code)]
+
     address: String,
 }
 
 #[derive(Debug)]
 enum IpAddrKindTwo {
     V4(u8, u8, u8, u8),
-    #[allow(dead_code)]
+
     V6(String),
 }
 
@@ -42,7 +41,7 @@ enum IpAddrKindTwo {
 enum OptionExample<T> {
     // <T> is any type
     None, // equivalent of null
-    #[allow(dead_code)]
+
     Some(T), // equivalent of not-null
 }
 
@@ -77,15 +76,15 @@ fn route(addr_type: IpAddrKind) {
 fn matching() -> u8 {
     enum Coin {
         Penny,
-        #[allow(dead_code)]
+
         Nickle,
-        #[allow(dead_code)]
+
         Dime,
-        #[allow(dead_code)]
+
         Quarter,
-        #[allow(dead_code)]
+
         HalfDollar,
-        #[allow(dead_code)]
+
         Dollar,
     }
 
@@ -110,7 +109,6 @@ fn matching() -> u8 {
 }
 
 fn matching_with_catchall_in_cases() {
-    #[allow(dead_code)]
     enum Message {
         ChangeColor(u8, u8, u8),
         Echo(String),
@@ -156,7 +154,7 @@ fn options() {
 fn catchall_patterns() {
     fn add_fancy_hat() {}
     fn remove_fancy_hat() {}
-    #[allow(unused_variables)]
+
     fn move_player(num_spaces: u8) {}
     fn reroll() {}
 
@@ -215,7 +213,6 @@ fn iflet() {
     fn without_iflet() {
         let config_max = Some(3u8);
 
-        #[allow(clippy::single_match)]
         match config_max {
             // Assigns the value of config_max to max
             Some(max) => println!("The maximum is configured to be {}", max),

@@ -1,4 +1,14 @@
-use learning_rust::{terminal::clear_screen, tui_formatting::*};
+#![allow(
+    dead_code,
+    unused_variables,
+    unused_assignments,
+    unused_mut,
+    clippy::main_recursion,
+    clippy::manual_range_contains,
+    clippy::single_match
+)]
+
+use learning_rust::tui_formatting::*;
 
 pub mod lessons {
     pub mod ch_10_generics_traits_lifetimes;
@@ -47,8 +57,6 @@ enum ModuleType {
 
 fn modules_menu(menu_type: ModuleType) {
     loop {
-        clear_screen();
-
         let modules: Vec<Module>;
         let mut header: String = String::new();
 
@@ -81,7 +89,6 @@ fn modules_menu(menu_type: ModuleType) {
         let choice = dialogue_selector(&options, options.len() - 1, None);
 
         if choice == (options.len() - 2) {
-            #[allow(clippy::main_recursion)]
             main();
         }
 

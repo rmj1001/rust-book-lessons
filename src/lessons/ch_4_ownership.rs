@@ -32,7 +32,6 @@ pub fn ownership_info() {
     //
     {
         // s is not yet valid
-        #[allow(unused_mut)]
         let mut s: &str = "hello world"; // s is now valid
         println!("{s}");
     } // s is no longer valid
@@ -42,13 +41,11 @@ pub fn ownership_info() {
     let _y: i64 = x; // x is still valid, y copied the value from x.
 
     // Below is a mutable string which is stored on the heap
-    #[allow(unused_mut)]
     let mut hello: String = String::from("Hello World");
 
     // Values on the heap must be explicitly copied by method, not like how
     // values are copied from the stack. This transfers ownership of var
     // 'hello' data to a new var 'world'. 'hello' is no longer a valid variable.
-    #[allow(unused_mut)]
     let mut world: String = hello;
 
     // Below is an example of a heap value clone

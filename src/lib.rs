@@ -1,3 +1,5 @@
+#![allow(unused_assignments)]
+
 pub mod tui_formatting {
     pub struct Module {
         pub name: String,
@@ -23,7 +25,6 @@ pub mod tui_formatting {
     ///
     /// Default length is 80 characters
     pub fn print_line_string(total_length: Option<usize>) {
-        #[allow(unused_assignments)]
         let mut line_string: String = String::new();
 
         match total_length {
@@ -73,7 +74,7 @@ pub mod tui_formatting {
         let _ = std::io::stdin().read_line(&mut garbage);
     }
 
-    /// Creates a selector dialogue based on a vector of strings.
+    /// Returns the index of the element in the vector selected.
     pub fn dialogue_selector(
         options: &[String],
         default_index: usize,

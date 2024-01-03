@@ -178,15 +178,12 @@ fn to_panic_or_not() {
     //? 3. Create custom types for validating data and handling errors with the
     //?    compiler.
 
-    #[allow(dead_code)]
     struct Guess {
         value: i32,
     }
 
     impl Guess {
-        #[allow(dead_code)]
         pub fn new(value: i32) -> Option<Guess> {
-            #[allow(clippy::manual_range_contains)]
             if value >= 1 && value <= 100 {
                 return Some(Guess { value });
             }
