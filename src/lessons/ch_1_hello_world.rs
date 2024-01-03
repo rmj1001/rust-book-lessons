@@ -9,11 +9,11 @@ pub fn fmt() {
     learning_rust::tui_formatting::module_tui_formatter(
         "Hello World",
         "N/A",
-        main,
+        hello_world,
         Some(ModuleFlags::Lesson),
     );
 }
 
-fn main() {
+fn hello_world() {
     println!("Hello World!");
 }

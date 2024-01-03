@@ -9,12 +9,12 @@ pub fn fmt() {
     learning_rust::tui_formatting::module_tui_formatter(
         "Guessing Game",
         "N/A",
-        main,
+        guessing_game,
         Some(ModuleFlags::Lesson),
     );
 }
 
-fn main() {
+fn guessing_game() {
     press_enter_to_continue();
     learning_rust::terminal::clear_screen();
     println!("-----------------------------------------");
