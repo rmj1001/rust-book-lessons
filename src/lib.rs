@@ -7,13 +7,13 @@ pub mod tui_formatting {
     /// Create a string of dashes with desired length
     ///
     /// Example: create_line_string(3) // ---
-    pub fn create_line_string(length: usize) -> String {
+    pub fn create_line_string(total_length: usize) -> String {
         let mut line_string: String = String::new();
-        let mut index: usize = 0;
+        let mut current_length: usize = 1;
 
-        while index < length {
+        while current_length <= total_length {
             line_string.push('-');
-            index += 1;
+            current_length += 1;
         }
 
         line_string
@@ -22,11 +22,11 @@ pub mod tui_formatting {
     /// Print a line of dashes to STDOUT.
     ///
     /// Default length is 80 characters
-    pub fn print_line_string(line_length: Option<usize>) {
+    pub fn print_line_string(total_length: Option<usize>) {
         #[allow(unused_assignments)]
         let mut line_string: String = String::new();
 
-        match line_length {
+        match total_length {
             None => line_string = create_line_string(80),
             Some(length) => line_string = create_line_string(length),
         }
@@ -49,27 +49,21 @@ pub mod tui_formatting {
             }
         }
 
-        let mut header_str = String::new();
+        let mut header = String::new();
 
-        let spaces_on_one_side = (80 - (title.len() + 2)) / 2;
+        header.push_str(&create_line_string(80));
+        header.push('\n');
 
-        header_str.push('|');
+        let spaces_on_one_side = (80 - (title.len() + 2)) / 2 + 1;
 
-        add_spaces_to_string(&mut header_str, spaces_on_one_side);
+        add_spaces_to_string(&mut header, spaces_on_one_side);
 
-        header_str.push_str(title);
+        header.push_str(title);
 
-        add_spaces_to_string(&mut header_str, spaces_on_one_side);
+        header.push('\n');
+        header.push_str(&create_line_string(80));
 
-        if header_str.len() == 78 {
-            header_str.push_str(" |");
-        } else {
-            header_str.push('|');
-        }
-
-        print_line_string(None);
-        println!("{}", header_str);
-        print_line_string(None);
+        println!("{}", header);
     }
 
     /// Equivalent to DOS "pause" command
@@ -80,15 +74,27 @@ pub mod tui_formatting {
     }
 
     /// Creates a selector dialogue based on a vector of strings.
-    pub fn dialogue_selector(options: &[String], default_index: usize) -> usize {
-        dialoguer::Select::new()
-            .with_prompt(
-                "Use arrow keys to select an option below, then press ENTER/RETURN to run it",
-            )
-            .items(options)
-            .default(0)
-            .interact()
-            .unwrap_or(default_index)
+    pub fn dialogue_selector(
+        options: &[String],
+        default_index: usize,
+        optional_prompt: Option<&str>,
+    ) -> usize {
+        match optional_prompt {
+            Some(prompt) => dialoguer::Select::new()
+                .with_prompt(prompt)
+                .items(options)
+                .default(0)
+                .interact()
+                .unwrap_or(default_index),
+            None => dialoguer::Select::new()
+                .with_prompt(
+                    "Use ↑ ↓ keys to select an option below, then press ENTER/RETURN to run it",
+                )
+                .items(options)
+                .default(0)
+                .interact()
+                .unwrap_or(default_index),
+        }
     }
 
     pub enum ModuleFlags {

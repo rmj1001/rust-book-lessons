@@ -27,7 +27,7 @@ fn main() {
             "NAV: Exit".to_string(),
         ];
 
-        let choice: usize = dialogue_selector(&options, 2);
+        let choice: usize = dialogue_selector(&options, 2, None);
 
         match choice {
             0 => modules_menu(ModuleType::Lesson),
@@ -78,7 +78,7 @@ fn modules_menu(menu_type: ModuleType) {
         options.push("NAV: Main Menu".to_string());
         options.push("NAV: Exit".to_string());
 
-        let choice = dialogue_selector(&options, options.len() - 1);
+        let choice = dialogue_selector(&options, options.len() - 1, None);
 
         if choice == (options.len() - 2) {
             #[allow(clippy::main_recursion)]
