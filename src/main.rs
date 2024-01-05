@@ -5,7 +5,8 @@
     unused_mut,
     clippy::main_recursion,
     clippy::manual_range_contains,
-    clippy::single_match
+    clippy::single_match,
+    clippy::needless_lifetimes
 )]
 
 use learning_rust::tui_formatting::*;
