@@ -13,6 +13,7 @@ use learning_rust::tui_formatting::*;
 
 pub mod lessons {
     pub mod ch_10_generics_traits_lifetimes;
+    pub mod ch_11_tests;
     pub mod ch_1_hello_world;
     pub mod ch_2_guessing_game;
     pub mod ch_3_common_concepts;
@@ -157,6 +158,10 @@ fn new_lessons_cache() -> Vec<Module> {
         Module {
             name: "Generic Types, Traits, Lifetimes".to_string(),
             code: lessons::ch_10_generics_traits_lifetimes::fmt,
+        },
+        Module {
+            name: "Writing Automated Tests".to_string(),
+            code: lessons::ch_11_tests::fmt,
         },
     ]
 }

@@ -2,8 +2,8 @@ use std::fmt::Display;
 
 pub fn fmt() {
     learning_rust::tui_formatting::module_tui_formatter(
-        "Title",
-        "Description",
+        "Generics, Traits, and Lifetime Annotations",
+        "N/A",
         main,
         Some(learning_rust::tui_formatting::ModuleFlags::Lesson),
     );
